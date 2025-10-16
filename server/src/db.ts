@@ -2,7 +2,22 @@ import Database from "better-sqlite3";
 import fs from "fs";
 import path from "path";
 
-const DB_DIR = process.env.DB_DIR || path.resolve(process.cwd(), "data");
+function resolveWritableDir() {
+  const customDir = process.env.DB_DIR;
+  if (customDir) return customDir;
+
+  const localDir = path.resolve(process.cwd(), "data");
+  try {
+    fs.mkdirSync(localDir, { recursive: true });
+    fs.accessSync(localDir, fs.constants.W_OK);
+    return localDir;
+  } catch {
+    console.warn("[DB] Local data directory not writable, using /tmp");
+    return "/tmp";
+  }
+}
+
+const DB_DIR = resolveWritableDir();
 const DB_FILE = process.env.DB_FILE || "database.db";
 const INIT_SQL =
   process.env.DB_INIT_SQL || path.resolve(process.cwd(), "init.sql");
