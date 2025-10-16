@@ -5,10 +5,15 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home.tsx";
 import Admin from "./pages/Admin.tsx";
 
-const router = createBrowserRouter([
-  { path: "/", element: <Home /> },
-  { path: "/admin", element: <Admin /> },
-]);
+const router = createBrowserRouter(
+  [
+    { path: "/", element: <Home /> },
+    { path: "/admin", element: <Admin /> },
+  ],
+  {
+    basename: import.meta.env.BASE_URL,
+  }
+);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
