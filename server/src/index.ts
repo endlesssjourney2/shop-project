@@ -7,13 +7,25 @@ dotenv.config();
 
 const app = express();
 
-app.use(
-  cors({
-    origin: process.env.CORS_ORIGIN?.split(",") || "*",
-    credentials: true,
-  })
-);
+const ALLOWED = (process.env.CORS_ORIGIN || "")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
+
+const useCredentials = ALLOWED.length > 0;
+
+const corsOptions: cors.CorsOptions = {
+  origin: useCredentials ? ALLOWED : true,
+  credentials: useCredentials,
+  methods: ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
+
 app.use(express.json());
+
 app.use("/api", router);
 
 app.get("/healthz", (_, res) => res.send("ok"));
