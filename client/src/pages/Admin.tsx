@@ -13,14 +13,14 @@ const Admin: FC = () => {
   });
 
   const loadItems = async () => {
-    const res = await api.get<Product[]>("/api/products");
+    const res = await api.get<Product[]>("/products");
     setProducts(res.data);
   };
 
   const addItem = async () => {
     if (!addProducts.name || !addProducts.price || !addProducts.category)
       return console.error("Type new product");
-    await api.post("/api/products", addProducts);
+    await api.post("/products", addProducts);
 
     await loadItems();
     setAddProducts({
@@ -31,7 +31,7 @@ const Admin: FC = () => {
   };
 
   const removeItem = async (id: number) => {
-    await api.delete(`/api/products/${id}`);
+    await api.delete(`/products/${id}`);
     await loadItems();
   };
 
