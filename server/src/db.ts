@@ -2,7 +2,6 @@ import Database from "better-sqlite3";
 import fs from "fs";
 import path from "path";
 
-const ROOT = path.resolve(__dirname, "..");
 const DB_DIR = process.env.DB_DIR || path.resolve(process.cwd(), "data");
 const DB_FILE = process.env.DB_FILE || "database.db";
 const INIT_SQL =
@@ -11,7 +10,6 @@ const INIT_SQL =
 if (!fs.existsSync(DB_DIR)) fs.mkdirSync(DB_DIR, { recursive: true });
 
 const dbPath = path.join(DB_DIR, DB_FILE);
-console.log("📦 DB path:", dbPath);
 const db = new Database(dbPath) as unknown as import("better-sqlite3").Database;
 
 db.exec(`

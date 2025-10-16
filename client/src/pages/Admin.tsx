@@ -1,7 +1,6 @@
-import { FC, useEffect, useState } from "react";
+import { type FC, useEffect, useState } from "react";
 import "../App.css";
-import axios from "axios";
-import { Product } from "../types/product";
+import { type Product } from "../types/product";
 import { Link } from "react-router-dom";
 import { api } from "../api";
 

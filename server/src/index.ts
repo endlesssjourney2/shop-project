@@ -17,7 +17,6 @@ app.use("/api", router);
 app.get("/healthz", (_, res) => res.send("ok"));
 
 app.use((err: any, _req: any, res: any, _next: any) => {
-  console.error("❌ API error:", err);
   res.status(500).json({ error: err?.message || "Internal Server Error" });
 });
 
