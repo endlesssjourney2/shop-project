@@ -38,7 +38,7 @@ storage/
 # ENV
 .env
 .env.*.local
-
+!.env.production
 # SQLite
 *.db
 *.db-journal
