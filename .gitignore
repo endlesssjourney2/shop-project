@@ -1,0 +1,65 @@
+# --- Node ---
+node_modules/
+node_modules
+**/node_modules/
+npm-debug.log*
+yarn-*.log
+pnpm-debug.log*
+
+# --- Build & caches ---
+dist/
+**/dist/
+.build/
+.cache/
+**/.vite/
+coverage/
+.nyc_output/
+**/*.tsbuildinfo
+.eslintcache
+
+# --- Environments & secrets ---
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+**/!.env.example
+
+# --- Database / uploads ---
+db/**/*.db
+db/**/*.sqlite
+db/**/*.sqlite3
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+uploads/
+storage/
+
+# ENV
+.env
+.env.*.local
+
+# SQLite
+*.db
+*.db-journal
+/data/
+data/
+
+# --- Test artifacts ---
+cypress/videos/
+cypress/screenshots/
+playwright-report/
+test-results/
+
+# --- IDE / OS ---
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# --- Docker ---
+docker-compose.override.yml
+docker-compose.local.yml
