@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const Home: FC = () => {
   return (
-    <div>
+    <div className="home">
       Home
-      <Link to={"/admin"}></Link>
+      <Link to={"/admin"}>Admin</Link>
     </div>
   );
 };

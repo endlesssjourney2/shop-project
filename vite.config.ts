@@ -5,5 +5,5 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   root: "client",
   plugins: [react()],
-  base: "/shop-project",
+  base: "/shop-project/",
 });
