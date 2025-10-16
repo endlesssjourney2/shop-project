@@ -21,6 +21,7 @@ const Admin: FC = () => {
     if (!addProducts.name || !addProducts.price || !addProducts.category)
       return console.error("Type new product");
     await api.post("/products", addProducts);
+
     await loadItems();
     setAddProducts({
       name: "",
