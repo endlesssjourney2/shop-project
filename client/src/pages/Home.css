@@ -48,3 +48,30 @@
   border: 1px solid #ccc;
   border-radius: 8px;
 }
+
+.category-filters {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.category-btn {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  background-color: #f0f0f0;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.category-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.category-btn.active {
+  background-color: #333;
+  color: white;
+  border-color: #333;
+}

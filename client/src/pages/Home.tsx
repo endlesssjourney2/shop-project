@@ -15,6 +15,7 @@ const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -30,9 +31,20 @@ const Home = () => {
 
     fetchProducts();
   }, []);
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+
+  const uniqueCategories = [
+    "All",
+    ...new Set(products.map((product) => product.category)),
+  ];
+
+  const filteredProducts = products
+    .filter((product) =>
+      product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .filter(
+      (product) =>
+        selectedCategory === "All" || product.category === selectedCategory
+    );
 
   if (loading) {
     return <div className="loading">Loading...</div>;
@@ -54,6 +66,19 @@ const Home = () => {
           className="search-input"
           onChange={(event) => setSearchTerm(event.target.value)}
         />
+        <div className="category-filters">
+          {uniqueCategories.map((category) => (
+            <button
+              key={category}
+              className={`category-btn ${
+                selectedCategory === category ? "active" : ""
+              }`}
+              onClick={() => setSelectedCategory(category)}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="products-grid">
