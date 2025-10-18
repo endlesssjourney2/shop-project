@@ -16,6 +16,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [sortMethod, setSortMethod] = useState("default");
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -36,7 +37,6 @@ const Home = () => {
     "All",
     ...new Set(products.map((product) => product.category)),
   ];
-
   const filteredProducts = products
     .filter((product) =>
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -45,6 +45,19 @@ const Home = () => {
       (product) =>
         selectedCategory === "All" || product.category === selectedCategory
     );
+
+  const sortedAndFilteredProducts = [...filteredProducts].sort((a, b) => {
+    switch (sortMethod) {
+      case "price-asc":
+        return a.price - b.price;
+      case "price-desc":
+        return b.price - a.price;
+      case "name-asc":
+        return a.name.localeCompare(b.name);
+      default:
+        return 0;
+    }
+  });
 
   if (loading) {
     return <div className="loading">Loading...</div>;
@@ -66,6 +79,16 @@ const Home = () => {
           className="search-input"
           onChange={(event) => setSearchTerm(event.target.value)}
         />
+        <select
+          className="sort-select"
+          value={sortMethod}
+          onChange={(e) => setSortMethod(e.target.value)}
+        >
+          <option value="default">Domyślnie</option>
+          <option value="price-asc">Cena: od najtańszych</option>
+          <option value="price-desc">Cena: od najdroższych</option>
+          <option value="name-asc">Nazwa: A-Z</option>
+        </select>
         <div className="category-filters">
           {uniqueCategories.map((category) => (
             <button
@@ -82,7 +105,7 @@ const Home = () => {
       </div>
 
       <div className="products-grid">
-        {filteredProducts.map((product) => (
+        {sortedAndFilteredProducts.map((product) => (
           <ProductCard
             key={product._id}
             name={product.name}
