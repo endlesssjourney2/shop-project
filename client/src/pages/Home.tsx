@@ -105,14 +105,18 @@ const Home = () => {
       </div>
 
       <div className="products-grid">
-        {sortedAndFilteredProducts.map((product) => (
-          <ProductCard
-            key={product._id}
-            name={product.name}
-            price={product.price}
-            category={product.category}
-          />
-        ))}
+        {sortedAndFilteredProducts.length === 0 ? (
+          <p className="no-products-found">Nie znaleziono produktów</p>
+        ) : (
+          sortedAndFilteredProducts.map((product) => (
+            <ProductCard
+              key={product._id}
+              name={product.name}
+              price={product.price}
+              category={product.category}
+            />
+          ))
+        )}
       </div>
     </div>
   );

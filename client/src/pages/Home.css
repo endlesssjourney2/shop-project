@@ -99,3 +99,7 @@
   flex-wrap: wrap;
   gap: 10px;
 }
+.no-products-found {
+  text-align: center;
+  grid-column: 1 / -1;
+}
