@@ -1,8 +1,4 @@
-interface ProductCardProps {
-  name: string;
-  price: number;
-  category: string;
-}
+import type { ProductCardProps } from "../types/product";
 
 const ProductCard = ({ name, price, category }: ProductCardProps) => {
   return (

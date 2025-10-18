@@ -3,13 +3,7 @@ import { Link } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import { api } from "../api";
 import "./Home.css";
-
-interface Product {
-  _id: string;
-  name: string;
-  price: number;
-  category: string;
-}
+import type { Product } from "../types/product";
 
 const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -110,7 +104,7 @@ const Home = () => {
         ) : (
           sortedAndFilteredProducts.map((product) => (
             <ProductCard
-              key={product._id}
+              key={product.id}
               name={product.name}
               price={product.price}
               category={product.category}

@@ -4,3 +4,8 @@ export type Product = {
   price: number;
   category: string;
 };
+export type ProductCardProps = {
+  name: string;
+  price: number;
+  category: string;
+};
