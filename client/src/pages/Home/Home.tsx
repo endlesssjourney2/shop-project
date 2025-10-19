@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import ProductCard from "../components/ProductCard";
-import { api } from "../api";
-import "./Home.css";
-import type { Product } from "../types/product";
+import s from "./Home.module.css";
+import ProductCard from "../../components/ProductCard/ProductCard";
+import { api } from "../../api";
+import type { Product } from "../../types/product";
 
 const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -54,27 +54,27 @@ const Home = () => {
   });
 
   if (loading) {
-    return <div className="loading">Loading...</div>;
+    return <div className={s.loading}>Loading...</div>;
   }
 
   return (
-    <div className="homepage">
-      <header className="homepage-header">
+    <div className={s.homepage}>
+      <header className={s.homepageHeader}>
         <h1>Product catalog</h1>
         <nav>
           <Link to="/admin">Admin Panel</Link>
         </nav>
       </header>
 
-      <div className="filters-container">
+      <div className={s.filtersContainer}>
         <input
           type="text"
           placeholder="Search by name..."
-          className="search-input"
+          className={s.searchInput}
           onChange={(event) => setSearchTerm(event.target.value)}
         />
         <select
-          className="sort-select"
+          className={s.sortSelect}
           value={sortMethod}
           onChange={(e) => setSortMethod(e.target.value)}
         >
@@ -83,12 +83,12 @@ const Home = () => {
           <option value="price-desc">Cena: od najdroższych</option>
           <option value="name-asc">Nazwa: A-Z</option>
         </select>
-        <div className="category-filters">
+        <div className={s.categoryFilters}>
           {uniqueCategories.map((category) => (
             <button
               key={category}
-              className={`category-btn ${
-                selectedCategory === category ? "active" : ""
+              className={`${s.categoryBtn} ${
+                selectedCategory === category ? `${s.active}` : ""
               }`}
               onClick={() => setSelectedCategory(category)}
             >
@@ -98,9 +98,9 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="products-grid">
+      <div className={s.productsGrid}>
         {sortedAndFilteredProducts.length === 0 ? (
-          <p className="no-products-found">Nie znaleziono produktów</p>
+          <p className={s.noProductsFound}>Nie znaleziono produktów</p>
         ) : (
           sortedAndFilteredProducts.map((product) => (
             <ProductCard

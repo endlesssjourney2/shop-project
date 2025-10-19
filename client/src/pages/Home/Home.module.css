@@ -4,18 +4,18 @@
   margin: 0 auto;
 }
 
-.homepage-header {
+.homepageHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
 }
 
-.homepage-header h1 {
+.homepageHeader h1 {
   margin: 0;
 }
 
-.homepage-header a {
+.homepageHeader a {
   padding: 8px 16px;
   background-color: #f0f0f0;
   border-radius: 6px;
@@ -24,7 +24,7 @@
   font-weight: bold;
 }
 
-.products-grid {
+.productsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
@@ -36,11 +36,11 @@
   margin-top: 50px;
 }
 
-.filters-container {
+.filtersContainer {
   margin-bottom: 20px;
 }
 
-.search-input {
+.searchInput {
   width: 100%;
   max-width: 400px;
   padding: 10px 15px;
@@ -49,14 +49,14 @@
   border-radius: 8px;
 }
 
-.category-filters {
+.categoryFilters {
   margin-top: 15px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.category-btn {
+.categoryBtn {
   padding: 8px 16px;
   font-size: 0.9rem;
   background-color: #f0f0f0;
@@ -66,25 +66,31 @@
   transition: all 0.2s ease;
 }
 
-.category-btn:hover {
+.categoryBtn:hover {
   background-color: #e0e0e0;
 }
 
-.category-btn.active {
+.categoryBtn.active {
   background-color: #333;
   color: white;
   border-color: #333;
 }
 
-.sort-select {
+.sortSelect {
   padding: 10px 15px;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: white;
   margin-top: 15px;
+  cursor: pointer;
 }
-.filters-container {
+
+.select {
+  cursor: pointer;
+}
+
+.filtersContainer {
   margin-bottom: 20px;
   display: flex;
   flex-wrap: wrap;
@@ -92,14 +98,14 @@
   align-items: center;
   gap: 20px;
 }
-.category-filters {
+.categoryFilters {
   width: 100%;
   margin-top: 15px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
-.no-products-found {
+.noProductsFound {
   text-align: center;
   grid-column: 1 / -1;
 }

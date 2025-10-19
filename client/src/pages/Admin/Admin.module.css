@@ -1,4 +1,4 @@
-.admin-panel {
+.adminPanel {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -6,15 +6,15 @@
   background-color: #ccc;
 }
 
-.admin-header {
+.adminHeader {
   margin: 20px 0 35px 0;
 }
 
-.admin-title-header {
+.adminTitleHeader {
   font-size: 30px;
 }
 
-.add-container {
+.addContainer {
   width: 800px;
   display: flex;
   justify-content: center;
@@ -23,7 +23,7 @@
   gap: 10px;
   margin-bottom: 20px;
 }
-.admin-input {
+.adminInput {
   padding: 10px 12px;
   border-radius: 8px;
   border: 1px solid #ccc;
@@ -32,7 +32,7 @@
   font-size: 14px;
 }
 
-.admin-addBtn {
+.adminAddBtn {
   padding: 10px 18px;
   border: none;
   background-color: #2fac48;
@@ -43,23 +43,23 @@
   transition: background-color 0.2s linear;
 }
 
-.admin-addBtn:hover {
+.adminAddBtn:hover {
   background-color: #22a13c;
 }
 
-.admin-items-container {
+.adminItemsContainer {
   max-width: 1000px;
   width: 100%;
 }
 
-.admin-list {
+.adminList {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   gap: 20px;
   padding: 0;
 }
 
-.admin-list-item {
+.adminListItem {
   background: #fff;
   padding: 18px;
   border-radius: 12px;
@@ -71,28 +71,20 @@
   align-items: center;
   flex-direction: column;
   gap: 10px;
+  transition: transform 0.2s ease-in-out;
 }
 
-.admin-list-item h2,
-.admin-list-item p {
+.adminListItem:hover {
+  transform: translateY(-5px);
+}
+
+.adminListItem h2,
+.adminListItem p {
   overflow-wrap: anywhere;
   word-break: break-word;
 }
-.admin-list-item-title {
-  font-size: 20px;
-}
 
-.admin-list-item-price {
-  font-size: 18px;
-  opacity: 0.8;
-}
-
-.admin-list-item-category {
-  font-size: 14px;
-  opacity: 0.5;
-}
-
-.delete-btn {
+.deleteBtn {
   border: none;
   background: #e03131;
   cursor: pointer;
@@ -103,15 +95,25 @@
   transition: all 0.2s linear;
 }
 
-.delete-btn:hover {
+.deleteBtn:hover {
   background: #a11a1a;
   transform: scale(1.05);
   transform: translateY(-2px);
 }
 
-.admin-link {
+.adminLink {
   margin-top: 20px;
   text-decoration: none;
   color: white;
   font-size: 20px;
+}
+
+.error {
+  font-size: 3rem;
+  color: red;
+}
+
+.noProducts {
+  text-align: center;
+  font-size: 3rem;
 }

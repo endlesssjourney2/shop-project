@@ -1,0 +1,22 @@
+.productCard {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  background-color: white;
+  width: 200px;
+}
+
+.productCardName {
+  font-size: 1rem;
+}
+
+.productCardPrice {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+.productCardCategory {
+  font-size: 0.9rem;
+  opacity: 0.5;
+}
