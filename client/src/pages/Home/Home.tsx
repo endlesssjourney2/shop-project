@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import s from "./Home.module.css";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import { auth } from "../../firebase";
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import type { User } from "firebase/auth";
 import { api } from "../../api";
 import type { Product } from "../../types/product";
 
@@ -11,6 +14,15 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [sortMethod, setSortMethod] = useState("default");
+  const [user, setUser] = useState<User | null>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -26,6 +38,15 @@ const Home = () => {
 
     fetchProducts();
   }, []);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate("/");
+    } catch (error) {
+      console.error("Failed to log out:", error);
+    }
+  };
 
   const uniqueCategories = [
     "All",
@@ -62,15 +83,26 @@ const Home = () => {
       <header className={s.homepageHeader}>
         <h1>Product catalog</h1>
         <nav>
-          <Link to="/login" className="nav-link">
-            Login
-          </Link>
-          <Link to="/register" className="nav-link highlight">
-            Registration
-          </Link>
-          <Link to="/admin" className="nav-link admin-link">
-            Admin Panel
-          </Link>
+          {user ? (
+            <>
+              <Link to="/admin" className="nav-link admin-link">
+                Admin Panel
+              </Link>
+              {/* need styles*/}
+              <button onClick={handleLogout} className="nav-link logout-btn">
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="nav-link">
+                Login
+              </Link>
+              <Link to="/register" className="nav-link highlight">
+                Registration
+              </Link>
+            </>
+          )}
         </nav>
       </header>
 
