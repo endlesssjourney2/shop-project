@@ -62,7 +62,15 @@ const Home = () => {
       <header className={s.homepageHeader}>
         <h1>Product catalog</h1>
         <nav>
-          <Link to="/admin">Admin Panel</Link>
+          <Link to="/login" className="nav-link">
+            Login
+          </Link>
+          <Link to="/register" className="nav-link highlight">
+            Registration
+          </Link>
+          <Link to="/admin" className="nav-link admin-link">
+            Admin Panel
+          </Link>
         </nav>
       </header>
 
