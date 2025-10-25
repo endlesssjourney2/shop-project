@@ -63,3 +63,5 @@ Thumbs.db
 # --- Docker ---
 docker-compose.override.yml
 docker-compose.local.yml
+
+server/src/serviceAccountKey.json

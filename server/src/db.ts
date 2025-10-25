@@ -1,44 +1,10 @@
-import Database from "better-sqlite3";
-import fs from "fs";
-import path from "path";
+import * as admin from "firebase-admin";
+import serviceAccount from "./serviceAccountKey.json";
 
-function resolveWritableDir() {
-  const customDir = process.env.DB_DIR;
-  if (customDir) return customDir;
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount as any),
+});
 
-  const localDir = path.resolve(process.cwd(), "data");
-  try {
-    fs.mkdirSync(localDir, { recursive: true });
-    fs.accessSync(localDir, fs.constants.W_OK);
-    return localDir;
-  } catch {
-    console.warn("[DB] Local data directory not writable, using /tmp");
-    return "/tmp";
-  }
-}
-
-const DB_DIR = resolveWritableDir();
-const DB_FILE = process.env.DB_FILE || "database.db";
-const INIT_SQL =
-  process.env.DB_INIT_SQL || path.resolve(process.cwd(), "init.sql");
-
-if (!fs.existsSync(DB_DIR)) fs.mkdirSync(DB_DIR, { recursive: true });
-
-const dbPath = path.join(DB_DIR, DB_FILE);
-const db = new Database(dbPath) as unknown as import("better-sqlite3").Database;
-
-db.exec(`
-  CREATE TABLE IF NOT EXISTS products (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    price REAL NOT NULL,
-    category TEXT NOT NULL
-  );
-`);
-
-if (fs.existsSync(INIT_SQL)) {
-  const sql = fs.readFileSync(INIT_SQL, "utf8");
-  db.exec(sql);
-}
+const db = admin.firestore();
 
 export default db;
