@@ -1,5 +1,6 @@
 import { Router } from "express";
 import db from "./db";
+import * as admin from "firebase-admin";
 
 const router = Router();
 const productsCollection = db.collection("products");
@@ -26,7 +27,7 @@ router.get("/products", async (_, res) => {
     const snapshot = await productsCollection.get();
     const products: any[] = [];
 
-    snapshot.forEach((doc) => {
+    snapshot.forEach((doc: admin.firestore.QueryDocumentSnapshot) => {
       products.push({
         id: doc.id,
         ...doc.data(),
