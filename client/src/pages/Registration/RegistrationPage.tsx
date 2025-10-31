@@ -2,6 +2,8 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { Link, useNavigate } from "react-router-dom";
+import s from "./RegistrationPage.module.css";
+import { TextField } from "@mui/material";
 
 const RegistrationPage = () => {
   const [email, setEmail] = useState("");
@@ -29,36 +31,53 @@ const RegistrationPage = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <h2>Register</h2>
+    <div className={s.registrationPage}>
+      <form className={s.registrationForm} onSubmit={handleSubmit}>
+        <h2 className={s.title}>Register</h2>
         <div>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
+          <TextField
+            className={s.input}
+            fullWidth
+            label="Email"
+            variant="outlined"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            sx={{
+              input: { color: "#f1f5f9" },
+              label: { color: "#f1f5f9" },
+            }}
           />
         </div>
         <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
+          <TextField
+            className={s.input}
+            fullWidth
+            label="Password"
+            variant="outlined"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            sx={{
+              input: { color: "#f1f5f9" },
+              label: { color: "#f1f5f9" },
+            }}
           />
         </div>
         {error && <p>{error}</p>}
-        <button type="submit">Register</button>
-        <p>
-          Already have an account? <Link to="/login">Log in</Link>
+        <button className={s.submitButton} type="submit">
+          Register
+        </button>
+        <p className={s.pText}>
+          Already have an account?{" "}
+          <Link className={s.link} to="/login">
+            Log in
+          </Link>
         </p>
-        <p>
-          <Link to="/">Back to Home</Link>
+        <p className={s.pText}>
+          <Link className={s.link} to="/">
+            Back to Home
+          </Link>
         </p>
       </form>
     </div>
