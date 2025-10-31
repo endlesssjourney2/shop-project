@@ -82,23 +82,22 @@ const Home = () => {
     <div className={s.homepage}>
       <header className={s.homepageHeader}>
         <h1>Product catalog</h1>
-        <nav>
+        <nav className={s.navLinks}>
           {user ? (
             <>
-              <Link to="/admin" className="nav-link admin-link">
+              <Link to="/admin" className={`${s.navLink} ${s.adminLink}`}>
                 Admin Panel
               </Link>
-              {/* need styles*/}
-              <button onClick={handleLogout} className="nav-link logout-btn">
+              <button onClick={handleLogout} className={s.logoutBtn}>
                 Logout
               </button>
             </>
           ) : (
             <>
-              <Link to="/login" className="nav-link">
+              <Link to="/login" className={s.navLink}>
                 Login
               </Link>
-              <Link to="/register" className="nav-link highlight">
+              <Link to="/register" className={s.navLink}>
                 Registration
               </Link>
             </>

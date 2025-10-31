@@ -55,6 +55,7 @@ const RegistrationPage = () => {
             fullWidth
             label="Password"
             variant="outlined"
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required

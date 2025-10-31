@@ -109,15 +109,16 @@
   text-align: center;
   grid-column: 1 / -1;
 }
-.homepage-header nav.auth-nav {
+
+.navLinks {
   display: flex;
   gap: 15px;
   align-items: center;
+  justify-content: center;
 }
 
-.homepage-header .nav-link {
+.navLink {
   padding: 8px 16px;
-  border: 1px solid #ddd;
   border-radius: 6px;
   text-decoration: none;
   color: #333;
@@ -125,18 +126,22 @@
   transition: all 0.2s ease;
 }
 
-.homepage-header .nav-link:hover {
-  background-color: #f0f0f0;
+.navLink:hover {
+  transform: translateY(-1px);
 }
 
-.homepage-header .nav-link.highlight {
-  background-color: #333;
-  color: white;
-  border-color: #333;
+.logoutBtn {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #333;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* !!! */
-
-.homepage-header .admin-link {
+.logoutBtn:hover {
   background-color: #f0f0f0;
+  transform: scale(1.02);
 }
