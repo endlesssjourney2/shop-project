@@ -8,11 +8,13 @@ const productsCollection = db.collection("products");
 // CREATE
 router.post("/products", async (req, res) => {
   try {
-    const { name, price, category } = req.body;
+    const { name, price, category, description, photoUrl } = req.body;
     const docRef = await productsCollection.add({
       name,
       price: Number(price),
       category,
+      description,
+      photoUrl,
     });
 
     res.status(201).json({ id: docRef.id });
@@ -58,12 +60,14 @@ router.get("/products/:id", async (req, res) => {
 // UPDATE
 router.put("/products/:id", async (req, res) => {
   try {
-    const { name, price, category } = req.body;
+    const { name, price, category, description, photoUrl } = req.body;
     const docRef = productsCollection.doc(req.params.id);
     await docRef.update({
       name,
       price: Number(price),
       category,
+      description,
+      photoUrl,
     });
     res.json({ updated: true });
   } catch (error) {

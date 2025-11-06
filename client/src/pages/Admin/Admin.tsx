@@ -11,6 +11,8 @@ const Admin: FC = () => {
     name: "",
     price: "",
     category: "",
+    description: "",
+    photoUrl: "",
   });
   const [error, setError] = useState<string | null>(null);
 
@@ -25,15 +27,23 @@ const Admin: FC = () => {
   };
 
   const addItem = async () => {
-    if (!addProducts.name || !addProducts.price || !addProducts.category)
+    if (
+      !addProducts.name ||
+      !addProducts.price ||
+      !addProducts.category ||
+      !addProducts.description ||
+      !addProducts.photoUrl
+    )
       return console.error("Type new product");
-    await api.post("/products", addProducts);
 
+    await api.post("/products", addProducts);
     await loadItems();
     setAddProducts({
       name: "",
       price: "",
       category: "",
+      description: "",
+      photoUrl: "",
     });
   };
 
@@ -79,6 +89,24 @@ const Admin: FC = () => {
             setAddProducts({ ...addProducts, category: e.target.value })
           }
         />
+        <h3 className={s.adminInfo}>Description</h3>
+        <textarea
+          className={s.adminInput}
+          value={addProducts.description}
+          onChange={(e) =>
+            setAddProducts({ ...addProducts, description: e.target.value })
+          }
+        />
+        <h3 className={s.adminInfo}>Photo URL</h3>
+        <input
+          className={s.adminInput}
+          type="text"
+          placeholder="https://..."
+          value={addProducts.photoUrl}
+          onChange={(e) =>
+            setAddProducts({ ...addProducts, photoUrl: e.target.value })
+          }
+        />
         <button className={s.adminAddBtn} onClick={addItem}>
           Add to database
         </button>
@@ -95,6 +123,8 @@ const Admin: FC = () => {
                     name={i.name}
                     price={i.price}
                     category={i.category}
+                    description={i.description}
+                    photoUrl={i.photoUrl}
                   />
                   <button
                     onClick={() => removeItem(i.id)}

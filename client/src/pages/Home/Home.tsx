@@ -1,8 +1,6 @@
-// client/src/pages/Home/Home.tsx
-
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import s from "./Home.module.css"; // Ми будемо використовувати CSS Modules
+import s from "./Home.module.css";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { auth } from "../../firebase";
 import { signOut, onAuthStateChanged } from "firebase/auth";
@@ -10,8 +8,6 @@ import type { User } from "firebase/auth";
 import { api } from "../../api";
 import type { Product } from "../../types/product";
 
-// 👇 Імпортуємо іконку пошуку (потрібно встановити lucide-react)
-// У терміналі (в папці client): npm install lucide-react
 import { Search } from "lucide-react";
 
 const Home = () => {
@@ -86,7 +82,6 @@ const Home = () => {
 
   return (
     <div className={s.homepage}>
-      {/* ===== НОВИЙ ХЕДЕР ===== */}
       <header className={s.header}>
         <div className={s.logo}>Product catalog</div>
 
@@ -123,7 +118,6 @@ const Home = () => {
         </nav>
       </header>
 
-      {/* ===== НОВИЙ БЛОК КЕРУВАННЯ ===== */}
       <div className={s.catalogHeader}>
         <h2>All Products</h2>
       </div>
@@ -157,7 +151,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* ===== СІТКА ТОВАРІВ (без змін) ===== */}
       <div className={s.productsGrid}>
         {sortedAndFilteredProducts.length === 0 ? (
           <p className={s.noProductsFound}>Nie znaleziono produktów</p>
@@ -168,6 +161,8 @@ const Home = () => {
               name={product.name}
               price={product.price}
               category={product.category}
+              description={product.description}
+              photoUrl={product.photoUrl}
             />
           ))
         )}
