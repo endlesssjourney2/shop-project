@@ -1,12 +1,18 @@
+// client/src/pages/Home/Home.tsx
+
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import s from "./Home.module.css";
+import s from "./Home.module.css"; // Ми будемо використовувати CSS Modules
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { auth } from "../../firebase";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import type { User } from "firebase/auth";
 import { api } from "../../api";
 import type { Product } from "../../types/product";
+
+// 👇 Імпортуємо іконку пошуку (потрібно встановити lucide-react)
+// У терміналі (в папці client): npm install lucide-react
+import { Search } from "lucide-react";
 
 const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -35,7 +41,6 @@ const Home = () => {
         setLoading(false);
       }
     };
-
     fetchProducts();
   }, []);
 
@@ -52,6 +57,7 @@ const Home = () => {
     "All",
     ...new Set(products.map((product) => product.category)),
   ];
+
   const filteredProducts = products
     .filter((product) =>
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -80,15 +86,27 @@ const Home = () => {
 
   return (
     <div className={s.homepage}>
-      <header className={s.homepageHeader}>
-        <h1>Product catalog</h1>
-        <nav className={s.navLinks}>
+      {/* ===== НОВИЙ ХЕДЕР ===== */}
+      <header className={s.header}>
+        <div className={s.logo}>Product catalog</div>
+
+        <div className={s.searchContainer}>
+          <Search className={s.searchIcon} size={20} />
+          <input
+            type="text"
+            placeholder="Search by name..."
+            className={s.searchInput}
+            onChange={(event) => setSearchTerm(event.target.value)}
+          />
+        </div>
+
+        <nav className={s.authNav}>
           {user ? (
             <>
-              <Link to="/admin" className={`${s.navLink} ${s.adminLink}`}>
-                Admin Panel
+              <Link to="/admin" className={s.navLink}>
+                Admin
               </Link>
-              <button onClick={handleLogout} className={s.logoutBtn}>
+              <button onClick={handleLogout} className={s.navButton}>
                 Logout
               </button>
             </>
@@ -97,7 +115,7 @@ const Home = () => {
               <Link to="/login" className={s.navLink}>
                 Login
               </Link>
-              <Link to="/register" className={s.navLink}>
+              <Link to="/register" className={`${s.navLink} ${s.highlight}`}>
                 Registration
               </Link>
             </>
@@ -105,29 +123,18 @@ const Home = () => {
         </nav>
       </header>
 
-      <div className={s.filtersContainer}>
-        <input
-          type="text"
-          placeholder="Search by name..."
-          className={s.searchInput}
-          onChange={(event) => setSearchTerm(event.target.value)}
-        />
-        <select
-          className={s.sortSelect}
-          value={sortMethod}
-          onChange={(e) => setSortMethod(e.target.value)}
-        >
-          <option value="default">Domyślnie</option>
-          <option value="price-asc">Cena: od najtańszych</option>
-          <option value="price-desc">Cena: od najdroższych</option>
-          <option value="name-asc">Nazwa: A-Z</option>
-        </select>
+      {/* ===== НОВИЙ БЛОК КЕРУВАННЯ ===== */}
+      <div className={s.catalogHeader}>
+        <h2>All Products</h2>
+      </div>
+
+      <div className={s.controlsContainer}>
         <div className={s.categoryFilters}>
           {uniqueCategories.map((category) => (
             <button
               key={category}
               className={`${s.categoryBtn} ${
-                selectedCategory === category ? `${s.active}` : ""
+                selectedCategory === category ? s.active : ""
               }`}
               onClick={() => setSelectedCategory(category)}
             >
@@ -135,8 +142,22 @@ const Home = () => {
             </button>
           ))}
         </div>
+
+        <div className={s.sortContainer}>
+          <select
+            className={s.sortSelect}
+            value={sortMethod}
+            onChange={(e) => setSortMethod(e.target.value)}
+          >
+            <option value="default">Domyślnie</option>
+            <option value="price-asc">Cena: od najtańszych</option>
+            <option value="price-desc">Cena: od najdroższych</option>
+            <option value="name-asc">Nazwa: A-Z</option>
+          </select>
+        </div>
       </div>
 
+      {/* ===== СІТКА ТОВАРІВ (без змін) ===== */}
       <div className={s.productsGrid}>
         {sortedAndFilteredProducts.length === 0 ? (
           <p className={s.noProductsFound}>Nie znaleziono produktów</p>
