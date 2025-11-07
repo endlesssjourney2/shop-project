@@ -1,13 +1,18 @@
 import type { ProductCardProps } from "../../types/product";
 import s from "./ProductCard.module.css";
 
+type Props = ProductCardProps & {
+  onBuyClick: () => void;
+};
+
 const ProductCard = ({
   name,
   price,
   category,
   description,
   photoUrl,
-}: ProductCardProps) => {
+  onBuyClick,
+}: Props) => {
   return (
     <div className={s.productCard}>
       <div className={s.imageContainer}>
@@ -18,6 +23,10 @@ const ProductCard = ({
       <p className={s.productCategory}>{category}</p>
       <p className={s.productDescription}>{description}</p>
       <p className={s.productPrice}>${price}</p>
+
+      <button className={s.buyButton} onClick={onBuyClick}>
+        Kupić
+      </button>
     </div>
   );
 };

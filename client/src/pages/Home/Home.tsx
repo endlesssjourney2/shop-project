@@ -7,6 +7,8 @@ import { signOut, onAuthStateChanged } from "firebase/auth";
 import type { User } from "firebase/auth";
 import { api } from "../../api";
 import type { Product } from "../../types/product";
+import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
+import { X } from "lucide-react";
 
 import { Search } from "lucide-react";
 
@@ -18,6 +20,8 @@ const Home = () => {
   const [sortMethod, setSortMethod] = useState("default");
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -39,6 +43,16 @@ const Home = () => {
     };
     fetchProducts();
   }, []);
+
+  const handleOpenModal = (product: Product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedProduct(null);
+  };
 
   const handleLogout = async () => {
     try {
@@ -158,15 +172,55 @@ const Home = () => {
           sortedAndFilteredProducts.map((product) => (
             <ProductCard
               key={product.id}
-              name={product.name}
-              price={product.price}
-              category={product.category}
-              description={product.description}
-              photoUrl={product.photoUrl}
+              {...product}
+              onBuyClick={() => handleOpenModal(product)}
             />
           ))
         )}
       </div>
+
+      <Dialog
+        open={isModalOpen}
+        onClose={handleCloseModal}
+        maxWidth="md"
+        fullWidth
+      >
+        {selectedProduct && (
+          <>
+            <DialogTitle className={s.modalTitle}>
+              {selectedProduct.name}
+              <IconButton
+                aria-label="close"
+                onClick={handleCloseModal}
+                className={s.closeButton}
+              >
+                <X />
+              </IconButton>
+            </DialogTitle>
+            <DialogContent dividers className={s.modalContent}>
+              <div className={s.modalLayout}>
+                <img
+                  src={selectedProduct.photoUrl}
+                  alt={selectedProduct.name}
+                  className={s.modalImage}
+                />
+                <div className={s.modalDetails}>
+                  <p className={s.modalDescription}>
+                    {selectedProduct.description}
+                  </p>
+                  <p className={s.modalCategory}>{selectedProduct.category}</p>
+                  <div className={s.modalFooter}>
+                    <span className={s.modalPrice}>
+                      ${selectedProduct.price}
+                    </span>
+                    <button className={s.modalBuyButton}>Add to Cart</button>
+                  </div>
+                </div>
+              </div>
+            </DialogContent>
+          </>
+        )}
+      </Dialog>
     </div>
   );
 };

@@ -147,3 +147,84 @@
   text-align: center;
   margin-top: 50px;
 }
+
+.modalTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 800 !important;
+  font-size: 1.8rem !important;
+}
+
+.closeButton {
+  color: #999;
+}
+.closeButton:hover {
+  background-color: #f0f0f0;
+}
+
+.modalContent {
+  padding: 24px !important;
+  background-color: #fffaf7;
+}
+
+.modalLayout {
+  display: flex;
+  gap: 25px;
+}
+
+.modalImage {
+  width: 45%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.modalDetails {
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalDescription {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.modalCategory {
+  font-style: italic;
+  color: #666;
+  margin-top: 15px;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  border-top: 1px solid #f0e9e4;
+  padding-top: 20px;
+}
+
+.modalPrice {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.modalBuyButton {
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background-color: #333;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.modalBuyButton:hover {
+  background-color: #555;
+}
