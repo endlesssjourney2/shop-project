@@ -20,3 +20,20 @@ body {
 
   background-color: #fffaf7;
 }
+
+:root {
+  --color-bg-primary: #0f172a;
+  --color-bg-secondary: #1e293b;
+  --color-text-primary: #f1f5f9;
+  --color-text-secondary: #cbd5e1;
+
+  --color-accent-blue: #38bdf8;
+  --color-accent-gold: #fbbf24;
+
+  --color-border: #334155;
+  --color-shadow: rgba(15, 23, 42, 0.6);
+
+  --color-hover-blue: #0ea5e9;
+  --color-hover-gold: #f59e0b;
+  --color-bg-hover: #1e293b;
+}
