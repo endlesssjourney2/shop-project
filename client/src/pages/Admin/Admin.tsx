@@ -15,6 +15,7 @@ const Admin: FC = () => {
     category: "",
     description: "",
     photoUrl: "",
+    specs: "",
   });
   const [error, setError] = useState<string | null>(null);
   const [touched, setTouched] = useState<Touched>({
@@ -23,6 +24,7 @@ const Admin: FC = () => {
     category: false,
     description: false,
     photoUrl: false,
+    specs: false,
   });
 
   const loadItems = async () => {
@@ -41,7 +43,8 @@ const Admin: FC = () => {
       !addProducts.price ||
       !addProducts.category ||
       !addProducts.description ||
-      !addProducts.photoUrl
+      !addProducts.photoUrl ||
+      !addProducts.specs
     )
       return console.error("Type new product");
 
@@ -53,6 +56,7 @@ const Admin: FC = () => {
       category: "",
       description: "",
       photoUrl: "",
+      specs: "",
     });
     setTouched({
       name: false,
@@ -60,6 +64,7 @@ const Admin: FC = () => {
       category: false,
       description: false,
       photoUrl: false,
+      specs: false,
     });
   };
 
@@ -153,6 +158,25 @@ const Admin: FC = () => {
           onBlur={() => setTouched({ ...touched, description: true })}
           sx={inputSx}
         />
+        <TextField
+          error={touched.specs && addProducts.specs === ""}
+          helperText={
+            touched.specs && addProducts.specs === ""
+              ? "Specifications are required"
+              : ""
+          }
+          fullWidth
+          label="Specifications (Care)"
+          variant="outlined"
+          className={s.adminInput}
+          type="text"
+          value={addProducts.specs}
+          onChange={(e) =>
+            setAddProducts({ ...addProducts, specs: e.target.value })
+          }
+          onBlur={() => setTouched({ ...touched, specs: true })}
+          sx={inputSx}
+        />
 
         <TextField
           error={touched.photoUrl && addProducts.photoUrl === ""}
@@ -191,14 +215,7 @@ const Admin: FC = () => {
             <ul className={s.adminList}>
               {products.map((i) => (
                 <li className={s.adminListItem} key={i.id}>
-                  <AdminProductCard
-                    name={i.name}
-                    price={i.price}
-                    category={i.category}
-                    description={i.description}
-                    photoUrl={i.photoUrl}
-                    id={""}
-                  />
+                  <AdminProductCard {...i} />
                   <button
                     onClick={() => removeItem(i.id)}
                     className={s.deleteBtn}

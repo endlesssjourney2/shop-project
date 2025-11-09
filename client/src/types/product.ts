@@ -5,6 +5,7 @@ export type Product = {
   category: string;
   description: string;
   photoUrl: string;
+  specs: string;
 };
 
 export type Touched = {
@@ -13,8 +14,9 @@ export type Touched = {
   category: boolean;
   description: boolean;
   photoUrl: boolean;
+  specs: boolean;
 };
 
 export type ProductCardProps = {
-  onBuyClick?: () => void;
+  onBuyClick: () => void;
 } & Product;

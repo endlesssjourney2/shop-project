@@ -207,12 +207,28 @@
   color: #333;
   line-height: 1.6;
   flex-grow: 1;
+  background-color: rgb(232, 245, 248);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
 }
 
 .modalCategory {
   font-style: italic;
   color: #666;
   margin-top: 15px;
+}
+.modalSpecs {
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.5;
+  margin-top: 15px;
+  background-color: #f5f0e8;
+  padding: 10px;
+  border-radius: 5px;
+}
+.modalSpecs strong {
+  color: #3a5a40;
 }
 
 .modalFooter {

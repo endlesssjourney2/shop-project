@@ -1,13 +1,14 @@
 import type { FC } from "react";
-import type { ProductCardProps } from "../../types/product";
+import type { Product } from "../../types/product";
 import s from "./AdminProductCard.module.css";
 
-const AdminProductCard: FC<ProductCardProps> = ({
+const AdminProductCard: FC<Product> = ({
   name,
   price,
   category,
   description,
   photoUrl,
+  specs,
 }) => {
   return (
     <div className={s.productCard}>
@@ -16,6 +17,7 @@ const AdminProductCard: FC<ProductCardProps> = ({
       <p className={s.productCardCategory}>Category: {category}</p>
       <img src={photoUrl} width="50" />
       <p>{description}</p>
+      <p style={{ fontSize: "12px", color: "gray" }}>Specs: {specs}</p>
     </div>
   );
 };

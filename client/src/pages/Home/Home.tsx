@@ -214,6 +214,9 @@ const Home = () => {
                     {selectedProduct.description}
                   </p>
                   <p className={s.modalCategory}>{selectedProduct.category}</p>
+                  <p className={s.modalSpecs}>
+                    <strong>Care:</strong> {selectedProduct.specs}
+                  </p>
                   <div className={s.modalFooter}>
                     <span className={s.modalPrice}>
                       ${selectedProduct.price}
