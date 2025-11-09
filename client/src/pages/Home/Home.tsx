@@ -132,52 +132,54 @@ const Home = () => {
         </nav>
       </header>
 
-      <div className={s.catalogHeader}>
-        <h2>All Products</h2>
-      </div>
+      <main className={s.mainContent}>
+        <div className={s.catalogHeader}>
+          <h2>All Products</h2>
+        </div>
 
-      <div className={s.controlsContainer}>
-        <div className={s.categoryFilters}>
-          {uniqueCategories.map((category) => (
-            <button
-              key={category}
-              className={`${s.categoryBtn} ${
-                selectedCategory === category ? s.active : ""
-              }`}
-              onClick={() => setSelectedCategory(category)}
+        <div className={s.controlsContainer}>
+          <div className={s.categoryFilters}>
+            {uniqueCategories.map((category) => (
+              <button
+                key={category}
+                className={`${s.categoryBtn} ${
+                  selectedCategory === category ? s.active : ""
+                }`}
+                onClick={() => setSelectedCategory(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+
+          <div className={s.sortContainer}>
+            <select
+              className={s.sortSelect}
+              value={sortMethod}
+              onChange={(e) => setSortMethod(e.target.value)}
             >
-              {category}
-            </button>
-          ))}
+              <option value="default">Domyślnie</option>
+              <option value="price-asc">Cena: od najtańszych</option>
+              <option value="price-desc">Cena: od najdroższych</option>
+              <option value="name-asc">Nazwa: A-Z</option>
+            </select>
+          </div>
         </div>
 
-        <div className={s.sortContainer}>
-          <select
-            className={s.sortSelect}
-            value={sortMethod}
-            onChange={(e) => setSortMethod(e.target.value)}
-          >
-            <option value="default">Domyślnie</option>
-            <option value="price-asc">Cena: od najtańszych</option>
-            <option value="price-desc">Cena: od najdroższych</option>
-            <option value="name-asc">Nazwa: A-Z</option>
-          </select>
+        <div className={s.productsGrid}>
+          {sortedAndFilteredProducts.length === 0 ? (
+            <p className={s.noProductsFound}>Nie znaleziono produktów</p>
+          ) : (
+            sortedAndFilteredProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                {...product}
+                onBuyClick={() => handleOpenModal(product)}
+              />
+            ))
+          )}
         </div>
-      </div>
-
-      <div className={s.productsGrid}>
-        {sortedAndFilteredProducts.length === 0 ? (
-          <p className={s.noProductsFound}>Nie znaleziono produktów</p>
-        ) : (
-          sortedAndFilteredProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              {...product}
-              onBuyClick={() => handleOpenModal(product)}
-            />
-          ))
-        )}
-      </div>
+      </main>
 
       <Dialog
         open={isModalOpen}

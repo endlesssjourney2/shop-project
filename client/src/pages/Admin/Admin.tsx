@@ -47,7 +47,7 @@ const Admin: FC = () => {
     });
   };
 
-  const removeItem = async (id: number) => {
+  const removeItem = async (id: string) => {
     await api.delete(`/products/${id}`);
     await loadItems();
   };
@@ -119,13 +119,7 @@ const Admin: FC = () => {
             <ul className={s.adminList}>
               {products.map((i) => (
                 <li className={s.adminListItem} key={i.id}>
-                  <AdminProductCard
-                    name={i.name}
-                    price={i.price}
-                    category={i.category}
-                    description={i.description}
-                    photoUrl={i.photoUrl}
-                  />
+                  <AdminProductCard {...i} />
                   <button
                     onClick={() => removeItem(i.id)}
                     className={s.deleteBtn}
