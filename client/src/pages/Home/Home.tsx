@@ -8,7 +8,7 @@ import type { User } from "firebase/auth";
 import { api } from "../../api";
 import type { Product } from "../../types/product";
 import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
-import { X } from "lucide-react";
+import { X, Leaf } from "lucide-react";
 
 import { Search } from "lucide-react";
 
@@ -97,13 +97,16 @@ const Home = () => {
   return (
     <div className={s.homepage}>
       <header className={s.header}>
-        <div className={s.logo}>Product catalog</div>
+        <div className={s.logo}>
+          <Leaf size={26} />
+          <span>GreenLeaf</span>
+        </div>
 
         <div className={s.searchContainer}>
           <Search className={s.searchIcon} size={20} />
           <input
             type="text"
-            placeholder="Search by name..."
+            placeholder="Search for plants..."
             className={s.searchInput}
             onChange={(event) => setSearchTerm(event.target.value)}
           />
@@ -223,6 +226,10 @@ const Home = () => {
           </>
         )}
       </Dialog>
+      <footer className={s.footer}>
+        <p>© 2025 GreenLeaf. All rights reserved.</p>
+        <p>Created for an educational project.</p>
+      </footer>
     </div>
   );
 };

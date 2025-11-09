@@ -21,7 +21,7 @@ const ProductCard = ({
       <p className={s.productPrice}>${price}</p>
 
       <button className={s.buyButton} onClick={onBuyClick}>
-        Kupić
+        to cart
       </button>
     </div>
   );
