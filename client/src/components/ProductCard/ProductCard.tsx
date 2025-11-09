@@ -1,10 +1,6 @@
 import type { ProductCardProps } from "../../types/product";
 import s from "./ProductCard.module.css";
 
-type Props = ProductCardProps & {
-  onBuyClick: () => void;
-};
-
 const ProductCard = ({
   name,
   price,
@@ -12,7 +8,7 @@ const ProductCard = ({
   description,
   photoUrl,
   onBuyClick,
-}: Props) => {
+}: ProductCardProps) => {
   return (
     <div className={s.productCard}>
       <div className={s.imageContainer}>

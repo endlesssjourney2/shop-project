@@ -1,9 +1,11 @@
 import { type FC, useEffect, useState } from "react";
 import s from "./Admin.module.css";
 import { Link } from "react-router-dom";
-import type { Product } from "../../types/product";
+import type { Product, Touched } from "../../types/product";
 import { api } from "../../api";
 import AdminProductCard from "../../components/AdminProductCard/AdminProductCard";
+import { Button, TextField } from "@mui/material";
+import { inputSx } from "./InputStyles";
 
 const Admin: FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -15,6 +17,13 @@ const Admin: FC = () => {
     photoUrl: "",
   });
   const [error, setError] = useState<string | null>(null);
+  const [touched, setTouched] = useState<Touched>({
+    name: false,
+    price: false,
+    category: false,
+    description: false,
+    photoUrl: false,
+  });
 
   const loadItems = async () => {
     try {
@@ -45,6 +54,13 @@ const Admin: FC = () => {
       description: "",
       photoUrl: "",
     });
+    setTouched({
+      name: false,
+      price: false,
+      category: false,
+      description: false,
+      photoUrl: false,
+    });
   };
 
   const removeItem = async (id: string) => {
@@ -62,54 +78,110 @@ const Admin: FC = () => {
         <h1 className={s.adminTitleHeader}>Admin panel</h1>
       </header>
       <div className={s.addContainer}>
-        <h3 className={s.adminInfo}>Name</h3>
-        <input
+        <TextField
+          error={touched.name && addProducts.name === ""}
+          helperText={
+            touched.name && addProducts.name === "" ? "Name is required" : ""
+          }
+          fullWidth
+          label="Name"
+          variant="outlined"
           className={s.adminInput}
           type="text"
           value={addProducts.name}
           onChange={(e) =>
             setAddProducts({ ...addProducts, name: e.target.value })
           }
+          onBlur={() => setTouched({ ...touched, name: true })}
+          sx={inputSx}
         />
-        <h3 className={s.adminInfo}>Price</h3>
-        <input
+
+        <TextField
+          error={touched.price && addProducts.price === ""}
+          helperText={
+            touched.price && addProducts.price === "" ? "Price is required" : ""
+          }
+          fullWidth
+          label="Price"
+          variant="outlined"
           className={s.adminInput}
-          type="number"
+          type="text"
           value={addProducts.price}
           onChange={(e) =>
             setAddProducts({ ...addProducts, price: e.target.value })
           }
+          onBlur={() => setTouched({ ...touched, price: true })}
+          sx={inputSx}
         />
-        <h3 className={s.adminInfo}>Category</h3>
-        <input
+
+        <TextField
+          error={touched.category && addProducts.category === ""}
+          helperText={
+            touched.category && addProducts.category === ""
+              ? "Category is required"
+              : ""
+          }
+          fullWidth
+          label="Category"
+          variant="outlined"
           className={s.adminInput}
           type="text"
           value={addProducts.category}
           onChange={(e) =>
             setAddProducts({ ...addProducts, category: e.target.value })
           }
+          onBlur={() => setTouched({ ...touched, category: true })}
+          sx={inputSx}
         />
-        <h3 className={s.adminInfo}>Description</h3>
-        <textarea
+
+        <TextField
+          error={touched.description && addProducts.description === ""}
+          helperText={
+            touched.description && addProducts.description === ""
+              ? "Description is required"
+              : ""
+          }
+          fullWidth
+          label="Description"
+          variant="outlined"
           className={s.adminInput}
+          type="text"
           value={addProducts.description}
           onChange={(e) =>
             setAddProducts({ ...addProducts, description: e.target.value })
           }
+          onBlur={() => setTouched({ ...touched, description: true })}
+          sx={inputSx}
         />
-        <h3 className={s.adminInfo}>Photo URL</h3>
-        <input
+
+        <TextField
+          error={touched.photoUrl && addProducts.photoUrl === ""}
+          helperText={
+            touched.photoUrl && addProducts.photoUrl === ""
+              ? "Photo URL is required"
+              : ""
+          }
+          fullWidth
+          label="Photo URL"
+          variant="outlined"
           className={s.adminInput}
           type="text"
-          placeholder="https://..."
           value={addProducts.photoUrl}
           onChange={(e) =>
             setAddProducts({ ...addProducts, photoUrl: e.target.value })
           }
+          onBlur={() => setTouched({ ...touched, photoUrl: true })}
+          sx={inputSx}
         />
-        <button className={s.adminAddBtn} onClick={addItem}>
+
+        <Button
+          className={s.adminAddBtn}
+          onClick={addItem}
+          variant="contained"
+          color="success"
+        >
           Add to database
-        </button>
+        </Button>
       </div>
       {error ? (
         <p className={s.error}>{error}</p>
@@ -119,7 +191,14 @@ const Admin: FC = () => {
             <ul className={s.adminList}>
               {products.map((i) => (
                 <li className={s.adminListItem} key={i.id}>
-                  <AdminProductCard {...i} />
+                  <AdminProductCard
+                    name={i.name}
+                    price={i.price}
+                    category={i.category}
+                    description={i.description}
+                    photoUrl={i.photoUrl}
+                    id={""}
+                  />
                   <button
                     onClick={() => removeItem(i.id)}
                     className={s.deleteBtn}

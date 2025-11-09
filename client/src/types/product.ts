@@ -6,4 +6,15 @@ export type Product = {
   description: string;
   photoUrl: string;
 };
-export type ProductCardProps = Product;
+
+export type Touched = {
+  name: boolean;
+  price: boolean;
+  category: boolean;
+  description: boolean;
+  photoUrl: boolean;
+};
+
+export type ProductCardProps = {
+  onBuyClick?: () => void;
+} & Product;

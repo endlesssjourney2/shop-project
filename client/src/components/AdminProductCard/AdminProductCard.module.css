@@ -1,10 +1,15 @@
 .productCard {
-  border: 1px solid #ddd;
   border-radius: 8px;
   padding: 10px;
   text-align: center;
-  background-color: white;
+  background-color: var(--color-border);
   width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-grow: 1;
 }
 
 .productCardName {
