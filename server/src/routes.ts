@@ -9,6 +9,13 @@ const productsCollection = db.collection("products");
 router.post("/products", async (req, res) => {
   try {
     const { name, price, category, description, photoUrl, specs } = req.body;
+
+    if (!name || !price || !category) {
+      return res.status(400).json({
+        error: "Bad Request",
+        message: "Missing required fields: name, price, category",
+      });
+    }
     const docRef = await productsCollection.add({
       name,
       price: Number(price),
@@ -81,6 +88,12 @@ router.put("/products/:id", async (req, res) => {
 router.delete("/products/:id", async (req, res) => {
   try {
     const docRef = productsCollection.doc(req.params.id);
+
+    const doc = await docRef.get();
+    if (!doc.exists) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
     await docRef.delete();
     res.json({ deleted: true });
   } catch (error) {
