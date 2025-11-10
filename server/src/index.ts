@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import router from "./routes";
 import dotenv from "dotenv";
+import morgan from "morgan";
 
 dotenv.config();
 
@@ -34,6 +35,11 @@ app.use((err: any, _req: any, res: any, _next: any) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`API on :${PORT}`);
-});
+
+if (process.env.NODE_ENV !== "test") {
+  app.listen(PORT, () => {
+    console.log(`API on :${PORT}`);
+  });
+}
+
+export default app;
