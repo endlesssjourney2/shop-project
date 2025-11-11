@@ -2,18 +2,14 @@ import type { ProductCardProps } from "../../types/product";
 import s from "./ProductCard.module.css";
 
 type Props = {
-  product: ProductCardProps; // 👈 Очікуємо 'product'
-  onModalOpen: () => void; // 👈 Очікуємо 'onModalOpen'
+  product: ProductCardProps;
+  onModalOpen: () => void;
 };
 
 const ProductCard = ({ product, onModalOpen }: Props) => {
-  // 3. Дістаємо функцію 'addToCart' прямо з "мозку"
-
-  // 4. Дістаємо дані з 'product', щоб було чистіше
   const { name, price, specs, photoUrl } = product;
 
   return (
-    // 5. Клік на КАРТКУ відкриває модалку
     <div className={s.productCard} onClick={onModalOpen}>
       <div className={s.cardContent}>
         <div className={s.imageContainer}>
