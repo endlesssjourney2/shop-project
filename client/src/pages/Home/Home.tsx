@@ -7,10 +7,16 @@ import { signOut, onAuthStateChanged } from "firebase/auth";
 import type { User } from "firebase/auth";
 import { api } from "../../api";
 import type { Product } from "../../types/product";
-import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
-import { X, Leaf } from "lucide-react";
-
-import { Search } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  Badge,
+} from "@mui/material";
+import { X, Search, Leaf, ShoppingCart } from "lucide-react";
+import { useCart } from "../../context/CartContext";
+import Cart from "../../components/Cart/Cart";
 
 const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -20,8 +26,11 @@ const Home = () => {
   const [sortMethod, setSortMethod] = useState("default");
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+  const { cartItems, toggleCart, addToCart } = useCart();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -113,6 +122,19 @@ const Home = () => {
         </div>
 
         <nav className={s.authNav}>
+          <IconButton
+            color="inherit"
+            onClick={toggleCart}
+            sx={{
+              backgroundColor: "#f5f0e8",
+              padding: "8px",
+              marginRight: "10px",
+            }}
+          >
+            <Badge badgeContent={cartItems.length} color="error">
+              <ShoppingCart />
+            </Badge>
+          </IconButton>
           {user ? (
             <>
               <Link to="/admin" className={s.navLink}>
@@ -176,8 +198,8 @@ const Home = () => {
             sortedAndFilteredProducts.map((product) => (
               <ProductCard
                 key={product.id}
-                {...product}
-                onBuyClick={() => handleOpenModal(product)}
+                product={product}
+                onModalOpen={() => handleOpenModal(product)}
               />
             ))
           )}
@@ -221,7 +243,15 @@ const Home = () => {
                     <span className={s.modalPrice}>
                       ${selectedProduct.price}
                     </span>
-                    <button className={s.modalBuyButton}>Add to Cart</button>
+                    <button
+                      className={s.modalBuyButton}
+                      onClick={() => {
+                        addToCart(selectedProduct);
+                        handleCloseModal();
+                      }}
+                    >
+                      Add to Cart
+                    </button>
                   </div>
                 </div>
               </div>
@@ -233,6 +263,7 @@ const Home = () => {
         <p>© 2025 GreenLeaf. All rights reserved.</p>
         <p>Created for an educational project.</p>
       </footer>
+      <Cart />
     </div>
   );
 };

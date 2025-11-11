@@ -17,6 +17,4 @@ export type Touched = {
   specs: boolean;
 };
 
-export type ProductCardProps = {
-  onBuyClick: () => void;
-} & Product;
+export type ProductCardProps = Product;

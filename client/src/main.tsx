@@ -7,6 +7,7 @@ import Admin from "./pages/Admin/Admin.tsx";
 import Home from "./pages/Home/Home.tsx";
 import LoginPage from "./pages/Login/LoginPage.tsx";
 import RegistrationPage from "./pages/Registration/RegistrationPage.tsx";
+import { CartProvider } from "./context/CartContext";
 
 const router = createBrowserRouter(
   [
@@ -28,6 +29,8 @@ const router = createBrowserRouter(
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <CartProvider>
+      <RouterProvider router={router} />
+    </CartProvider>
   </StrictMode>
 );
