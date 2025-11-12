@@ -2,6 +2,7 @@ import { Drawer, IconButton } from "@mui/material";
 import { X, Plus, Minus } from "lucide-react";
 import { useCart } from "../../context/CartContext";
 import s from "./Cart.module.css";
+import CheckoutButton from "../CheckoutButton/CheckoutButton";
 
 const Cart = () => {
   const {
@@ -68,7 +69,7 @@ const Cart = () => {
               <span>In total:</span>
               <span>${totalSum.toFixed(2)}</span>
             </div>
-            <button className={s.checkoutButton}>To the checkout</button>
+            <CheckoutButton />
           </div>
         )}
       </div>

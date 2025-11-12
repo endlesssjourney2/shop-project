@@ -1,14 +1,17 @@
 import { type FC, useEffect, useState } from "react";
 import s from "./Admin.module.css";
 import { Link } from "react-router-dom";
-import type { Product, Touched } from "../../types/product";
-import { api } from "../../api";
+import type { Order, Product, Touched } from "../../types/product";
+import { api } from "../../api/api";
 import AdminProductCard from "../../components/AdminProductCard/AdminProductCard";
 import { Button, TextField } from "@mui/material";
 import { inputSx } from "./InputStyles";
+import { completeOrder, getOrders } from "../../api/orders";
+import AdminOrder from "../../components/AdminOrder/AdminOrder";
 
 const Admin: FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
   const [addProducts, setAddProducts] = useState({
     name: "",
     price: "",
@@ -31,10 +34,17 @@ const Admin: FC = () => {
     try {
       const res = await api.get<Product[]>("/products");
       setProducts(res.data);
+      const data = await getOrders();
+      setOrders(data);
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       setError(message);
     }
+  };
+
+  const handleCompleteOrder = async (id: string) => {
+    await completeOrder(id);
+    await loadItems();
   };
 
   const addItem = async () => {
@@ -211,6 +221,7 @@ const Admin: FC = () => {
         <p className={s.error}>{error}</p>
       ) : (
         <div className={s.adminItemsContainer}>
+          <h2 className={s.productTitle}>Products</h2>
           {products.length ? (
             <ul className={s.adminList}>
               {products.map((i) => (
@@ -230,6 +241,26 @@ const Admin: FC = () => {
           )}
         </div>
       )}
+      <div className={s.adminItemsContainer}>
+        <h2 className={s.ordersTitle}>Orders</h2>
+        {orders.length ? (
+          <ul className={s.adminList}>
+            {orders.map((o) => (
+              <li className={s.adminListItem} key={o.id}>
+                <AdminOrder {...o} />
+                <button
+                  onClick={() => handleCompleteOrder(o.id)}
+                  className={s.completeBtn}
+                >
+                  Complete order
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className={s.noOrders}>No orders yet</p>
+        )}
+      </div>
 
       <Link className={s.adminLink} to="/">
         ← Main page

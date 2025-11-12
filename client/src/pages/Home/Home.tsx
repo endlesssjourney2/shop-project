@@ -5,7 +5,7 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 import { auth } from "../../firebase";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import type { User } from "firebase/auth";
-import { api } from "../../api";
+import { api } from "../../api/api";
 import type { Product } from "../../types/product";
 import {
   Dialog,

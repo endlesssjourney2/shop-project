@@ -110,19 +110,3 @@
   font-weight: 700;
   margin-bottom: 15px;
 }
-
-.checkoutButton {
-  width: 100%;
-  padding: 15px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: white;
-  background-color: #3a5a40;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.checkoutButton:hover {
-  background-color: #556b2f;
-}

@@ -1,0 +1,41 @@
+.orderCard {
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  background-color: var(--color-border);
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-grow: 1;
+}
+
+.id {
+  font-size: 20px;
+  text-align: center;
+}
+
+.orderName {
+  font-size: 20px;
+  text-align: center;
+}
+
+.qty {
+  font-size: 18px;
+  text-align: center;
+}
+
+.specs {
+  opacity: 0.7;
+  font-size: 15px;
+}
+
+.orderFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+}

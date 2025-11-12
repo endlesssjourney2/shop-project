@@ -94,6 +94,22 @@
   transform: scale(1.05);
 }
 
+.completeBtn {
+  border: none;
+  background: #2fac48;
+  cursor: pointer;
+  font-size: 1.2em;
+  color: white;
+  padding: 10px 10px;
+  border-radius: 10px;
+  transition: all 0.2s linear;
+}
+
+.completeBtn:hover {
+  background: #22a13c;
+  transform: scale(1.05);
+}
+
 .adminLink {
   margin: 20px 0 20px 0;
   text-decoration: none;
@@ -107,6 +123,23 @@
 }
 
 .noProducts {
+  text-align: center;
+  font-size: 3rem;
+}
+
+.productTitle {
+  text-align: center;
+  margin: 20px 0 20px 0;
+  color: var(--color-text-primary);
+}
+
+.ordersTitle {
+  text-align: center;
+  margin: 20px 0 20px 0;
+  color: var(--color-text-primary);
+}
+
+.noOrders {
   text-align: center;
   font-size: 3rem;
 }

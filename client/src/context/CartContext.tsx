@@ -1,26 +1,16 @@
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
-import type { Product } from "../types/product";
-
-export type CartItem = Product & {
-  quantity: number;
-};
-
-type CartContextType = {
-  cartItems: CartItem[];
-  isCartOpen: boolean;
-  addToCart: (product: Product) => void;
-  removeFromCart: (id: string) => void;
-  increaseQuantity: (id: string) => void;
-  decreaseQuantity: (id: string) => void;
-  toggleCart: () => void;
-};
+import type { CartContextType, CartItem, Product } from "../types/product";
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const clearCart = () => {
+    setCartItems([]);
+  };
 
   const addToCart = (productToAdd: Product) => {
     setCartItems((prevItems) => {
@@ -75,6 +65,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         toggleCart,
         increaseQuantity,
         decreaseQuantity,
+        clearCart,
       }}
     >
       {children}
