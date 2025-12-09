@@ -1,8 +1,8 @@
 import { Drawer, IconButton } from "@mui/material";
 import { X, Plus, Minus } from "lucide-react";
 import { useCart } from "../../context/CartContext";
-import s from "./Cart.module.css";
-import CheckoutButton from "../CheckoutButton/CheckoutButton";
+import s from "./Cart.module.css"; 
+import { useNavigate } from "react-router-dom"; 
 
 const Cart = () => {
   const {
@@ -13,23 +13,31 @@ const Cart = () => {
     decreaseQuantity,
   } = useCart();
 
+  const navigate = useNavigate();
+
   const totalSum = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
 
+  const handleCheckout = () => {
+    toggleCart(); 
+    navigate("/checkout"); 
+  };
+
   return (
     <Drawer anchor="right" open={isCartOpen} onClose={toggleCart}>
       <div className={s.cartDrawer}>
         <div className={s.cartHeader}>
-          <h2>Your shopping cart</h2>
+          <h2>Your Shopping Cart</h2>
           <IconButton onClick={toggleCart}>
             <X />
           </IconButton>
         </div>
+        
         <div className={s.cartItemsList}>
           {cartItems.length === 0 ? (
-            <p>Your cart is empty</p>
+            <p className={s.emptyMessage}>Your cart is empty.</p>
           ) : (
             cartItems.map((item) => (
               <div key={item.id} className={s.cartItem}>
@@ -40,7 +48,7 @@ const Cart = () => {
                 />
                 <div className={s.cartItemDetails}>
                   <p>{item.name}</p>
-                  <p>${item.price * item.quantity}</p>
+                  <p>${(item.price * item.quantity).toFixed(2)}</p>
                 </div>
 
                 <div className={s.quantityControls}>
@@ -69,7 +77,13 @@ const Cart = () => {
               <span>In total:</span>
               <span>${totalSum.toFixed(2)}</span>
             </div>
-            <CheckoutButton />
+            
+            <button 
+              className={s.checkoutBtn} 
+              onClick={handleCheckout}
+            >
+              Go to Checkout
+            </button>
           </div>
         )}
       </div>
