@@ -23,8 +23,8 @@ const CheckoutForm = ({ amount }: { amount: number }) => {
       elements,
       confirmParams: {
         return_url: window.location.hostname.includes("localhost")
-          ? window.location.origin + "/success"
-          : "https://endlesssjourney2.github.io/shop-project/success", 
+         ? window.location.origin + "/#/success"  
+          : "https://endlesssjourney2.github.io/shop-project/#/success", 
       },
     });
 
