@@ -1,10 +1,47 @@
 import { Router } from "express";
 import db from "./db";
 import * as admin from "firebase-admin";
+import Stripe from "stripe";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const router = Router();
 const productsCollection = db.collection("products");
 const ordersCollection = db.collection("orders");
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
+  apiVersion: "2025-11-17.clover", 
+});
+
+// PAYMENTS
+
+router.post("/payments/create-intent", async (req, res) => {
+  try {
+    const { amount, currency } = req.body;
+
+    if (!amount) {
+      return res.status(400).json({ error: "Amount is required" });
+    }
+
+    const amountInMinorUnits = Math.round(Number(amount) * 100);
+
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: amountInMinorUnits,
+      currency: currency || "pln", 
+      automatic_payment_methods: {
+        enabled: true,
+      },
+    });
+
+    res.json({
+      clientSecret: paymentIntent.client_secret,
+    });
+  } catch (error) {
+    console.error("Stripe error:", error);
+    res.status(500).json({ error: (error as Error).message });
+  }
+});
 
 //ORDERS
 
