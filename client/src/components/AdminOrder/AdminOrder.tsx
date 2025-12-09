@@ -16,6 +16,8 @@ const AdminOrder: FC<Order> = ({ id, items, total, createdAt }) => {
           <img src={i.photoUrl} width="50" />
           <h4 className={s.qty}>Quantity: {i.quantity}</h4>
           <p className={s.specs}>Specs: {i.specs}</p>
+          <p className={s.opis}>Opis: {i.opis}</p>
+
           <div className={s.orderFooter}>
             <h3 className={s.orderTotal}>{total}$</h3>
             <h3 className={s.createdAt}>{created.toLocaleString()}</h3>

@@ -9,6 +9,7 @@ const AdminProductCard: FC<Product> = ({
   description,
   photoUrl,
   specs,
+  opis,
 }) => {
   return (
     <div className={s.productCard}>
@@ -18,6 +19,7 @@ const AdminProductCard: FC<Product> = ({
       <img src={photoUrl} width="50" />
       <p>{description}</p>
       <p style={{ fontSize: "12px", color: "gray" }}>Specs: {specs}</p>
+      <p style={{ fontSize: "12px", color: "gray" }}>Opis: {opis}</p>
     </div>
   );
 };

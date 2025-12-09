@@ -6,6 +6,7 @@ export type Product = {
   description: string;
   photoUrl: string;
   specs: string;
+  opis: string;
 };
 
 export type CartItem = Product & {
@@ -19,6 +20,7 @@ export type Touched = {
   description: boolean;
   photoUrl: boolean;
   specs: boolean;
+  opis: boolean;
 };
 
 export type CartContextType = {

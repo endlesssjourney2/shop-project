@@ -56,6 +56,7 @@ router.post("/orders", async (req, res) => {
         price: number;
         quantity: number;
         photoUrl?: string;
+        opis: string;
       }>;
     };
 
@@ -109,7 +110,7 @@ router.delete("/orders/:id", async (req, res) => {
 // CREATE
 router.post("/products", async (req, res) => {
   try {
-    const { name, price, category, description, photoUrl, specs } = req.body;
+    const { name, price, category, description, photoUrl, specs, opis } = req.body;
 
     if (!name || !price || !category) {
       return res.status(400).json({
@@ -124,6 +125,7 @@ router.post("/products", async (req, res) => {
       description,
       photoUrl,
       specs,
+      opis,
     });
 
     res.status(201).json({ id: docRef.id });
@@ -171,7 +173,7 @@ router.get("/products/:id", async (req, res) => {
 // UPDATE
 router.put("/products/:id", async (req, res) => {
   try {
-    const { name, price, category, description, photoUrl, specs } = req.body;
+    const { name, price, category, description, photoUrl, specs, opis } = req.body;
     const docRef = productsCollection.doc(req.params.id);
     await docRef.update({
       name,
@@ -180,6 +182,7 @@ router.put("/products/:id", async (req, res) => {
       description,
       photoUrl,
       specs,
+      opis
     });
     res.json({ updated: true });
   } catch (error) {
