@@ -19,10 +19,12 @@ const CheckoutForm = ({ amount }: { amount: number }) => {
 
     setIsProcessing(true);
 
-    const { error } = await stripe.confirmPayment({
+   const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: window.location.origin + "/success",
+        return_url: window.location.hostname === "localhost"
+          ? window.location.origin + "/success"
+          : window.location.origin + "/shop-project/success",
       },
     });
 
