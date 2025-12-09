@@ -10,8 +10,8 @@ const router = Router();
 const productsCollection = db.collection("products");
 const ordersCollection = db.collection("orders");
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
-  apiVersion: "2025-11-17.clover", 
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_mock", {
+  apiVersion: "2025-11-17.clover",
 });
 
 // PAYMENTS
