@@ -19,7 +19,6 @@ const Admin: FC = () => {
     description: "",
     photoUrl: "",
     specs: "",
-    opis: "",
   });
   const [error, setError] = useState<string | null>(null);
   const [touched, setTouched] = useState<Touched>({
@@ -29,7 +28,6 @@ const Admin: FC = () => {
     description: false,
     photoUrl: false,
     specs: false,
-    opis: false,
   });
 
   const loadItems = async () => {
@@ -56,9 +54,7 @@ const Admin: FC = () => {
       !addProducts.category ||
       !addProducts.description ||
       !addProducts.photoUrl ||
-      !addProducts.specs ||
-      !addProducts.opis
-
+      !addProducts.specs 
     )
       return console.error("Type new product");
 
@@ -71,7 +67,6 @@ const Admin: FC = () => {
       description: "",
       photoUrl: "",
       specs: "",
-      opis: "",
 
     });
     setTouched({
@@ -81,7 +76,6 @@ const Admin: FC = () => {
       description: false,
       photoUrl: false,
       specs: false,
-      opis: false,
     });
   };
 
@@ -192,25 +186,6 @@ const Admin: FC = () => {
             setAddProducts({ ...addProducts, specs: e.target.value })
           }
           onBlur={() => setTouched({ ...touched, specs: true })}
-          sx={inputSx}
-        />
-        <TextField
-          error={touched.opis && addProducts.opis === ""}
-          helperText={
-            touched.opis && addProducts.opis === ""
-              ? "Opis is required"
-              : ""
-          }
-          fullWidth
-          label="Opis"
-          variant="outlined"
-          className={s.adminInput}
-          type="text"
-          value={addProducts.opis}
-          onChange={(e) =>
-            setAddProducts({ ...addProducts, opis: e.target.value })
-          }
-          onBlur={() => setTouched({ ...touched, opis: true })}
           sx={inputSx}
         />
 

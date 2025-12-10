@@ -239,9 +239,6 @@ const Home = () => {
                   <p className={s.modalSpecs}>
                     <strong>Care:</strong> {selectedProduct.specs}
                   </p>
-                  <p className={s.modalOpis}>
-                    <strong>Opis:</strong> {selectedProduct.opis}
-                  </p>
                   <div className={s.modalFooter}>
                     <span className={s.modalPrice}>
                       ${selectedProduct.price}

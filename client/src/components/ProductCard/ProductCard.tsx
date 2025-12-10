@@ -7,7 +7,7 @@ type Props = {
 };
 
 const ProductCard = ({ product, onModalOpen }: Props) => {
-  const { name, price, specs, photoUrl, opis } = product;
+  const { name, price, specs, photoUrl, } = product;
 
   return (
     <div className={s.productCard} onClick={onModalOpen}>
@@ -17,8 +17,6 @@ const ProductCard = ({ product, onModalOpen }: Props) => {
         </div>
         <h3 className={s.productName}>{name}</h3>
         <p className={s.productDescription}>{specs}</p>
-        
-        <p className={s.productOpis}>{opis}</p>
       </div>
 
       <div className={s.priceAndButtonContainer}>
