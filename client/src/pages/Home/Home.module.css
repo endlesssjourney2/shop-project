@@ -272,3 +272,70 @@
 .footer p {
   margin: 5px 0;
 }
+
+/* === АДАПТИВНІСТЬ ДЛЯ ТЕЛЕФОНІВ ТА ПЛАНШЕТІВ === */
+@media screen and (max-width: 768px) {
+  /* Перебудовуємо шапку: елементи стають один під одним */
+  .header {
+    flex-direction: column;
+    padding: 15px;
+    gap: 15px;
+  }
+
+  /* Логотип і навігація стають в один ряд нагорі */
+  .logo {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .authNav {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap; /* Дозволяє кнопкам переноситися, якщо не влазять */
+  }
+
+  /* Рядок пошуку займає всю ширину і падає вниз шапки */
+  .searchContainer {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    order: 3;
+  }
+
+  /* Фільтри та сортування стають у стовпчик */
+  .controlsContainer {
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch;
+  }
+
+  .categoryFilters {
+    justify-content: center;
+  }
+
+  .sortSelect {
+    width: 100%;
+  }
+
+  .productsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+  }
+
+  .modalLayout {
+    flex-direction: column;
+  }
+
+  .modalImage {
+    width: 100%;
+    height: 250px;
+  }
+
+  .modalDetails {
+    width: 100%;
+  }
+
+  .modalTitle {
+    font-size: 1.3rem !important;
+  }
+}
