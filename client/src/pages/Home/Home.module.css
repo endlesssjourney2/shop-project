@@ -273,16 +273,13 @@
   margin: 5px 0;
 }
 
-/* === АДАПТИВНІСТЬ ДЛЯ ТЕЛЕФОНІВ ТА ПЛАНШЕТІВ === */
 @media screen and (max-width: 768px) {
-  /* Перебудовуємо шапку: елементи стають один під одним */
   .header {
     flex-direction: column;
     padding: 15px;
     gap: 15px;
   }
 
-  /* Логотип і навігація стають в один ряд нагорі */
   .logo {
     width: 100%;
     justify-content: center;
@@ -291,10 +288,9 @@
   .authNav {
     width: 100%;
     justify-content: center;
-    flex-wrap: wrap; /* Дозволяє кнопкам переноситися, якщо не влазять */
+    flex-wrap: wrap;
   }
 
-  /* Рядок пошуку займає всю ширину і падає вниз шапки */
   .searchContainer {
     margin: 0;
     width: 100%;
@@ -302,7 +298,6 @@
     order: 3;
   }
 
-  /* Фільтри та сортування стають у стовпчик */
   .controlsContainer {
     flex-direction: column;
     gap: 15px;

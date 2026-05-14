@@ -143,3 +143,31 @@
   text-align: center;
   font-size: 3rem;
 }
+
+@media screen and (max-width: 768px) {
+  .addContainer {
+    width: 90%;
+    padding: 0 10px;
+  }
+
+  .adminItemsContainer {
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+
+  .adminList {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .error,
+  .noProducts,
+  .noOrders {
+    font-size: 1.8rem;
+  }
+
+  .adminTitleHeader {
+    font-size: 24px;
+    text-align: center;
+  }
+}
